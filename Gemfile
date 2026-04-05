@@ -21,6 +21,17 @@ gem "bcrypt", "~> 3.1.7"
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
+gem "dotenv-rails"
+gem "devise"
+gem "pundit"
+gem "ransack"
+gem "sidekiq"
+gem "redis"
+
+gem "rspec-rails", group: [:development, :test]
+gem "cucumber-rails", group: [:development, :test]
+gem "simplecov", group: :test, require: false
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
