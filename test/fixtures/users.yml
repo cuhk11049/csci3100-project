@@ -1,13 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  password: MyString
-  email: MyString
-  location: MyString
+  name: alice
+  email: alice@link.cuhk.edu.hk
+  location: new asia
+  password_digest: <%= BCrypt::Password.create("password123") %>
 
 two:
-  name: MyString
-  password: MyString
-  email: MyString
-  location: MyString
+  name: bob
+  email: bob@link.cuhk.edu.hk
+  location: united
+  password_digest: <%= BCrypt::Password.create("password123") %>
+
+three:
+  name: charlie
+  email: charlie@link.cuhk.edu.hk
+  location: shaw
+  password_digest: <%= BCrypt::Password.create("password123") %>

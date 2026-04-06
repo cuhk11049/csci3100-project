@@ -1,19 +1,46 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  description: MyText
-  price: 1
-  category: MyString
-  status: MyString
+  name: iPad Pro
+  description: Great tablet for note taking
+  price: 4200
+  category: electronics
+  status: available
   seller: one
-  post_date: MyString
+  post_date: 2026-04-01
 
 two:
-  name: MyString
-  description: MyText
-  price: 1
-  category: MyString
-  status: MyString
+  name: Microeconomics Textbook
+  description: Helpful for ECON students
+  price: 180
+  category: books
+  status: sold
   seller: two
-  post_date: MyString
+  post_date: 2026-04-02
+
+three:
+  name: iPhone 13
+  description: Blue phone in good condition
+  price: 2600
+  category: electronics
+  status: reserved
+  seller: one
+  post_date: 2026-04-03
+
+four:
+  name: Desk Lamp
+  description: Warm white study lamp for hostel desk
+  price: 90
+  category: furniture
+  status: available
+  seller: two
+  post_date: 2026-04-05
+
+five:
+  name: Gaming Chair
+  description: Ergonomic chair with adjustable back support
+  price: 850
+  category: furniture
+  status: available
+  seller: three
+  post_date: 2026-03-10

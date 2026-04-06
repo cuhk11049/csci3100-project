@@ -2,6 +2,6 @@
   <p>name: <%= user.name %></p>
   <p>location: <%= user.location %></p>
   <p>email: <%= user.email %></p>
-  <p>password: <%= user.password_digest %></p>
+  <p>password_digest present: <%= user.password_digest.present? %></p>
 <% end %>
   
