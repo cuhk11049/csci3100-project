@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get "/passwords/:user_id/verify_code", to: "passwords#edit", as: "verify_code"
   patch "/passwords/:user_id", to: "passwords#update", as: "password"
 
+  resources :locations
 
   resources :favorites, only: [:index, :create, :destroy] do
     collection do

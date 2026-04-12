@@ -1,9 +1,38 @@
-<h1>Enter Verification Code</h1>
-<p>We've sent a 6-digit code to your email.</p>
-<%= form_with(url: password_path(params[:user_id]), local: true, method: :patch) do |form| %>
-  <div class="form-group">
-    <%= form.label :code, "Verification Code", class: "form-label" %>
-    <%= form.text_field :code, class: "form-control", placeholder: "123456", required: true %>
+<div class="item-detail-container">
+  <div class="item-card-detail">
+    <!-- Centered Layout -->
+    <div class="item-layout" style="max-width: 60vw; margin: 0 auto;">
+      <div class="info-section">
+        
+        <!-- Header -->
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <h1 class="item-name" style="margin-bottom: 0.5rem;">Enter Verification Code</h1>
+          <p style="color: #6b7280;">We've sent a 6-digit code to your email.</p>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 2rem 0;">
+
+        <%= form_with(url: password_path(params[:user_id]), local: true, method: :patch) do |form| %>
+          
+          <!-- Verification Code Input -->
+          <div class="meta-info" style="display: block;">
+            <div class="meta-label">Verification Code</div>
+            <%= form.text_field :code, 
+                class: "meta-value", 
+                placeholder: "123456", 
+                required: true, 
+                style: "width: 100%; padding: 0.5rem; border: 1px solid #e5e7eb; border-radius: 0.375rem; margin-top: 0.25rem; box-sizing: border-box; text-align: center; letter-spacing: 2px; font-size: 1.2rem;" %>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="item-btn-container" style="margin-top: 2rem;">
+            <div class="item-btn-dummy"></div>
+            <%= form.submit "Verify Code", class: "btn-new item-btn" %>
+            <div class="item-btn-dummy"></div>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
   </div>
-  <%= form.submit "Verify Code", class: "btn-new" %>
-<% end %>
+</div>

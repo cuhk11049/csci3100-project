@@ -1,0 +1,38 @@
+<head>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.js"></script>
+</head>
+
+<div class="item-detail-container">
+  <div class="item-card-detail">
+    <div class="item-layout" style="max-width: 100vw; margin: 0 auto;">
+      <div class="info-section">
+        
+        <h1 class="item-name">Our Locations</h1>
+        
+        <!-- 1. THE MAP CONTAINER -->
+        <!-- Mapbox requires a specific height to be visible -->
+        <div id="map" style="width: 100%; height: 600px; border-radius: 0.5rem; overflow: hidden;"></div>
+
+        <!-- 2. INCLUDE MAPBOX ASSETS (CDN) -->
+        <!-- 3. INITIALIZE THE MAP -->
+        <script>
+          // A. Set your Access Token
+          mapboxgl.accessToken = '<%= ENV['MAPBOX_TOKEN'] %>'; // <--- PASTE YOUR TOKEN HERE
+
+          // B. Initialize the map
+          const map = new mapboxgl.Map({
+            container: 'map', // ID of the div above
+            style: 'mapbox://styles/mapbox/streets-v12', // The visual style (skin)
+            center: [114.2060, 22.4175], // Coordinates: [Longitude, Latitude] (Note the order!)
+            zoom: 13 // Zoom level (0-24)
+          });
+
+          // C. Add Controls (Zoom buttons, etc.)
+          map.addControl(new mapboxgl.NavigationControl());
+        </script>
+
+      </div>
+    </div>
+  </div>
+</div>

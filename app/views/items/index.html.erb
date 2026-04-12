@@ -13,6 +13,9 @@
       <span class="summary-label">Campus Scope</span>
       <strong>CUHK Only</strong>
     </div>
+    <div class="summary-chip">
+      <%= link_to "All Locations", locations_path, class: "btn-chip" %>
+    </div>
   <div class="user-actions">
     <p style="font-size: 1.25rem; font-weight: 600; margin-right:40px"> Hello <%= @user&.name || "CUHK User" %>! </p>
     <div class="dropdown">
