@@ -29,14 +29,14 @@
           <div class="meta-icon">📦</div>
           <div>
             <div class="meta-label">Your Favorites</div>
-            <% if @favorites.empty? %>
+            <% if @favorites.nil? || @favorites.empty? %>
               <div class="meta-value">You haven't favorited any items yet.</div>
             <% else %>
               <div class="meta-value">
-                <% @favorites.each do |item| %>
+                <% @favorites.each do |favorite| %>
                   <div style="padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb;">
-                    <%= link_to item.name, item_path(item), style="color: #2563eb; text-decoration: none;" %>
-                    <span style="color: #6b7280; margin-left: 0.5rem;">- $<%= item.price %></span>
+                    <%= link_to favorite.item.name, item_path(favorite.item), style="color: #2563eb; text-decoration: none;" %>
+                    <span style="color: #6b7280; margin-left: 0.5rem;">- $<%= favorite.item.price %></span>
                   </div>
                 <% end %>
               </div>
