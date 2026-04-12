@@ -14,7 +14,7 @@
       <strong>CUHK Only</strong>
     </div>
     <div class="summary-chip">
-      <%= link_to "All Locations", locations_path, class: "btn-chip" %>
+      <%= link_to "All Locations", locations_path, class: "btn-chip", data: { turbo: false } %>
     </div>
   <div class="user-actions">
     <p style="font-size: 1.25rem; font-weight: 600; margin-right:40px"> Hello <%= @user&.name || "CUHK User" %>! </p>
