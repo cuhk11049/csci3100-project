@@ -6,4 +6,12 @@ class UserMailer < ApplicationMailer
     @code = code
     mail(to: @user.email, subject: "Your PassWord Reset Code")
   end
+
+  def daily_report(user, new_items, favorite_items)
+    @user = user
+    @new_items = new_items
+    @favorite_items = favorite_items
+    mail(to: user.email, subject: 'Daily Trade Report on CampusTrade')
+  end
+  
 end

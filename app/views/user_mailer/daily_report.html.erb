@@ -1,0 +1,17 @@
+<h1>Hi <%= @user.name %>!</h1>
+
+<h2>New Items Listed Today (<%= @new_items.count %>)</h2>
+<ul>
+  <% @new_items.each do |item| %>
+    <li><%= item.name %> - $<%= item.price %></li>
+  <% end %>
+</ul>
+
+<h2>Your Favorite Items (<%= @favorite_items.count %>)</h2>
+<ul>
+  <% @favorite_items.each do |item| %>
+    <li><%= item.name %> - $<%= item.price %></li>
+  <% end %>
+</ul>
+
+<p>Thank you for using CampusTrade!</p >

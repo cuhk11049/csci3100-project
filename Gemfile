@@ -25,6 +25,7 @@ gem "devise"
 gem "pundit"
 gem "ransack"
 gem "sidekiq"
+gem "sidekiq-cron"
 gem "redis"
 
 gem "simplecov", group: :test, require: false
