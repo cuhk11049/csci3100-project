@@ -27,16 +27,56 @@
 </div> 
     
 <section class="market-toolbar">
-  <%= form_with url: items_path, method: :get, local: true, data: { turbo: false}, class: "filter-form" do %>
+  <%= form_with url: items_path,
+    method: :get,
+    local: true,
+    data: {
+      turbo: false,
+      controller: "autocomplete",
+      autocomplete_url_value: autocomplete_items_path
+    },
+    class: "filter-form" do %>
+    <%= hidden_field_tag :quick_filters,
+      @active_quick_filters.join(","),
+      data: { autocomplete_target: "quickFilters" } %>
     <div class="filter-grid">
-      <div class="filter-field filter-field-wide">
+      <div class="filter-field filter-field-wide autocomplete">
         <label for="keyword">Search</label>
-        <%= text_field_tag :keyword, params[:keyword], id: "keyword", class: "filter-input", placeholder: "Search by item name, keyword or seller", list: "item-name-suggestions" %>
-        <datalist id="item-name-suggestions">
+        <%= text_field_tag :keyword,
+          @search_filters[:keyword],
+          id: "keyword",
+          class: "filter-input",
+          placeholder: "Search by item name, keyword or seller",
+          autocomplete: "off",
+          role: "combobox",
+          aria: {
+            autocomplete: "list",
+            controls: "keyword-autocomplete-menu",
+            expanded: "false"
+          },
+          data: {
+            autocomplete_target: "input",
+            action: "input->autocomplete#search keydown->autocomplete#handleKeydown blur->autocomplete#scheduleClose focus->autocomplete#openIfResults"
+          } %>
+        <div
+          id="keyword-autocomplete-menu"
+          class="autocomplete-menu"
+          data-autocomplete-target="menu"
+          hidden
+          role="listbox"
+          aria-label="Search suggestions"
+        >
           <% @autocomplete_suggestions.each do |suggestion| %>
-            <option value="<%= suggestion %>"></option>
+            <button
+              type="button"
+              class="autocomplete-option"
+              data-autocomplete-target="option"
+              data-action="mousedown->autocomplete#selectSuggestion"
+              data-value="<%= suggestion %>"
+              role="option"
+            ><%= suggestion %></button>
           <% end %>
-        </datalist>
+        </div>
       </div>
 
       <div class="filter-field">
@@ -50,7 +90,7 @@
             ["Books", "books"],
             ["Sports", "sports"],
             ["Other", "other"]
-          ], params[:category]),
+          ], @search_filters[:category]),
           id: "category",
           class: "filter-select" %>
       </div>
@@ -63,7 +103,7 @@
             ["Available", "available"],
             ["Reserved", "reserved"],
             ["Sold", "sold"]
-          ], params[:status]),
+          ], @search_filters[:status]),
           id: "status",
           class: "filter-select" %>
       </div>
@@ -73,7 +113,7 @@
         <%= select_tag :seller_location,
           options_for_select(
             [["All communities", ""]] + @seller_locations.map { |location| [location.titleize, location] },
-            params[:seller_location]
+            @search_filters[:seller_location]
           ),
           id: "seller_location",
           class: "filter-select" %>
@@ -81,12 +121,12 @@
 
       <div class="filter-field">
         <label for="min_price">Min Price</label>
-        <%= number_field_tag :min_price, params[:min_price], id: "min_price", class: "filter-input", placeholder: "0", min: 0 %>
+        <%= number_field_tag :min_price, @search_filters[:min_price], id: "min_price", class: "filter-input", placeholder: "0", min: 0 %>
       </div>
 
       <div class="filter-field">
         <label for="max_price">Max Price</label>
-        <%= number_field_tag :max_price, params[:max_price], id: "max_price", class: "filter-input", placeholder: "5000", min: 0 %>
+        <%= number_field_tag :max_price, @search_filters[:max_price], id: "max_price", class: "filter-input", placeholder: "5000", min: 0 %>
       </div>
 
       <div class="filter-field">
@@ -97,7 +137,7 @@
             ["Last 3 days", "3"],
             ["Last 7 days", "7"],
             ["Last 30 days", "30"]
-          ], params[:posted_within_days]),
+          ], @search_filters[:posted_within_days]),
           id: "posted_within_days",
           class: "filter-select" %>
       </div>
@@ -111,18 +151,38 @@
             ["Oldest first", "oldest"],
             ["Price: low to high", "price_low_to_high"],
             ["Price: high to low", "price_high_to_low"]
-          ], params[:sort].presence || (params[:keyword].present? ? "relevance" : "newest")),
+          ], @search_filters[:sort].presence || (@search_filters[:keyword].present? ? "relevance" : "newest")),
           id: "sort",
           class: "filter-select" %>
       </div>
     </div>
 
     <div class="quick-filters">
+      <% under_100_active = @active_quick_filters.include?("under_100") %>
+      <% available_now_active = @active_quick_filters.include?("available_now") %>
+      <% books_notes_active = @active_quick_filters.include?("books_notes") %>
       <span class="quick-filters-label">Popular filters</span>
-      <button class="quick-filter-pill" type="button">Under $100</button>
-      <button class="quick-filter-pill" type="button">Available Now</button>
-      <button class="quick-filter-pill" type="button">Books & Notes</button>
-      <button class="quick-filter-pill" type="button">Dorm Pick-up</button>
+      <button
+        class="<%= quick_filter_button_classes(under_100_active) %>"
+        type="button"
+        aria-pressed="<%= under_100_active %>"
+        data-action="click->autocomplete#applyQuickFilter"
+        data-autocomplete-filter-id-param="under_100"
+      >Under $100</button>
+      <button
+        class="<%= quick_filter_button_classes(available_now_active) %>"
+        type="button"
+        aria-pressed="<%= available_now_active %>"
+        data-action="click->autocomplete#applyQuickFilter"
+        data-autocomplete-filter-id-param="available_now"
+      >Available Now</button>
+      <button
+        class="<%= quick_filter_button_classes(books_notes_active) %>"
+        type="button"
+        aria-pressed="<%= books_notes_active %>"
+        data-action="click->autocomplete#applyQuickFilter"
+        data-autocomplete-filter-id-param="books_notes"
+      >Books & Notes</button>
     </div>
 
     <div class="filter-actions">
