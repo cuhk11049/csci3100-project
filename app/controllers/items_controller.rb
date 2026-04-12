@@ -3,11 +3,14 @@ class ItemsController < ApplicationController
   before_action :set_user, only: %i[ index show new edit ]
 
   def index
+    @active_quick_filters = selected_quick_filters
+    @search_filters = effective_search_filters
+
     # 先把查询结果加载成数组，避免视图里 count/size 对带 search_rank
     # 自定义 select 的 relation 再次触发 PostgreSQL 计数 SQL。
-    @items = Item.search(search_params).to_a
-    @autocomplete_suggestions = if params[:keyword].present?
-      Item.autocomplete(params[:keyword], limit: 8)
+    @items = Item.search(@search_filters).to_a
+    @autocomplete_suggestions = if @search_filters[:keyword].present?
+      Item.autocomplete(@search_filters[:keyword], limit: 8)
     else
       Item.where.not(name: [ nil, "" ]).distinct.order(:name).limit(8).pluck(:name)
     end
@@ -64,6 +67,34 @@ class ItemsController < ApplicationController
     end
 
     def search_params
-      params.permit(:keyword, :category, :status, :seller_location, :min_price, :max_price, :posted_within_days, :sort)
+      params.permit(:keyword, :category, :status, :seller_location, :min_price, :max_price, :posted_within_days, :sort, :quick_filters)
+    end
+
+    def effective_search_filters
+      filters = search_params.to_h.symbolize_keys.except(:quick_filters)
+
+      quick_filter_defaults.each do |key, value|
+        filters[key] = value if filters[key].blank?
+      end
+
+      filters
+    end
+
+    def selected_quick_filters
+      search_params[:quick_filters].to_s.split(",").map(&:strip).reject(&:blank?).uniq
+    end
+
+    def quick_filter_defaults
+      selected_quick_filters.each_with_object({}) do |filter_id, merged_filters|
+        merged_filters.merge!(quick_filter_config[filter_id] || {})
+      end
+    end
+
+    def quick_filter_config
+      {
+        "under_100" => { max_price: "100" },
+        "available_now" => { status: "available" },
+        "books_notes" => { category: "books" }
+      }
     end
 end

@@ -125,7 +125,7 @@ class Item < ApplicationRecord
       prefix: prefix_keyword,
       contains: contains_keyword,
       query: stripped_keyword,
-      threshold: 0.18
+      threshold: 0.3
     ])
     priority_sql = sanitize_sql_array([
       <<~SQL.squish,
