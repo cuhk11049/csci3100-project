@@ -1,20 +1,56 @@
-<h1>My Favorites</h1>
+<div class="item-detail-container">
+  <div class="item-card-detail">
+    <div class="item-layout" style="max-width: 800px; margin: 0 auto;">
+      
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <div style="
+          width: 100px; 
+          height: 100px; 
+          background-color: #f3f4f6; 
+          border-radius: 50%; 
+          display: flex; 
+          align-items: center; 
+          justify-content: center; 
+          margin: 0 auto 1rem auto;
+          font-size: 2.5rem;
+          color: #4b5563;
+          font-weight: bold;
+        ">
+          ⭐
+        </div>
+        <h1 class="item-name" style="margin-bottom: 0.5rem;">My Favorites</h1>
+        <p style="color: #6b7280;">Your Saved Items</p >
+      </div>
 
-<% if @favorite_items.empty? %>
-  <p>You haven't favorited any items yet.</p >
-<% else %>
-  <div class="items-grid">
-    <% @favorite_items.each do |item| %>
-      <div class="item-card">
-        <div class="card-badge"><%= item.category %></div>
-        <div class="card-content">
-          <h3 class="card-title"><%= link_to item.name, item %></h3>
-          <p class="card-description"><%= truncate(item.description, length: 50) %></p >
-          <div class="card-price">$<%= item.price %></div>
+      <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 2rem 0;">
+
+      <div class="meta-info">
+        <div class="meta-item">
+          <div class="meta-icon">📦</div>
+          <div>
+            <div class="meta-label">Your Favorites</div>
+            <% if @favorites.empty? %>
+              <div class="meta-value">You haven't favorited any items yet.</div>
+            <% else %>
+              <div class="meta-value">
+                <% @favorites.each do |item| %>
+                  <div style="padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb;">
+                    <%= link_to item.name, item_path(item), style="color: #2563eb; text-decoration: none;" %>
+                    <span style="color: #6b7280; margin-left: 0.5rem;">- $<%= item.price %></span>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
-    <% end %>
-  </div>
-<% end %>
 
-<%= link_to "Back to Items", items_path, class: "btn-new mt-3" %>
+    </div>
+  </div>
+
+  <div class="item-btn-container">
+    <div class="item-btn-dummy"></div>
+    <%= link_to "← Back to Items", items_path, class: "btn-new item-btn" %>
+    <div class="item-btn-dummy"></div>
+  </div>
+</div>
