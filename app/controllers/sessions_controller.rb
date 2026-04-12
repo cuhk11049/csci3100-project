@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
   # similar to password_controller, edit and update password
   def edit
     @user = User.find_by(id: params[:user_id])
-    rediect_to new_password_path, alert: "Invalid request." unless @user&.password_reset_code
+    redirect_to new_password_path, alert: "Invalid request." unless @user&.password_reset_code
   end
 
   def update

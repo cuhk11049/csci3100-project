@@ -49,8 +49,9 @@ class User < ApplicationRecord
     with: CUHK_LINK_EMAIL_REGEX,
     message: "must end with @link.cuhk.edu.hk"
   }
-  validates :password, presence: true, length: { minimum: 6 }
-  validates :password_confirmation, presence: true, if: :password_present?
+  validates :password, presence: { on: :create }
+  validates :password, length: { minimum: 6 }, on: :create
+  validates :password_confirmation, presence: { on: :create }, if: :password_present?
 
   def self.find_seller_id(name)
     clean_name = name.to_s.strip

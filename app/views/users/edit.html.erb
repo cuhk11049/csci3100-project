@@ -1,7 +1,7 @@
 <div class="item-detail-container">
   <div class="item-card-detail">
     <!-- Centered Layout -->
-    <div class="item-layout" style="max-width: 80vw; margin: 0 auto;">
+    <div class="item-layout" style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
       
       <div class="info-section">
         
@@ -59,7 +59,7 @@
             %>
           </div>
 
-          <!-- Password Section -->
+                  <!-- Password Section (Optional) -->
           <div class="seller-card" style="margin-top: 2rem;">
             <div class="seller-info">
               <h4>🔐 Change Password (Optional)</h4>
@@ -67,15 +67,16 @@
             </div>
             
             <div style="margin-top: 1rem;">
-            <div class="meta-label">New Password</div>
-        <!-- Note: No 'required' attribute here -->
-            <%= form.password_field :password, class: "meta-value", style: "width: 100%; padding: 0.5rem; border: 1px solid #e5e7eb; border-radius: 0.375rem; margin-top: 0.25rem; box-sizing: border-box;" %>
+              <div class="meta-label">New Password</div>
+              <!-- REMOVED 'required' attribute below -->
+              <%= form.password_field :password, class: "meta-value", style: "width: 100%; padding: 0.5rem; border: 1px solid #e5e7eb; border-radius: 0.375rem; margin-top: 0.25rem; box-sizing: border-box;" %>
             </div>
-  
-        <div style="margin-top: 1rem;">
-        <div class="meta-label">Confirm Password</div>
-            <%= form.password_field :password_confirmation, class: "meta-value", style: "width: 100%; padding: 0.5rem; border: 1px solid #e5e7eb; border-radius: 0.375rem; margin-top: 0.25rem; box-sizing: border-box;" %>
-        </div>
+            
+            <div style="margin-top: 1rem;">
+              <div class="meta-label">Confirm Password</div>
+              <!-- REMOVED 'required' attribute below -->
+              <%= form.password_field :password_confirmation, class: "meta-value", style: "width: 100%; padding: 0.5rem; border: 1px solid #e5e7eb; border-radius: 0.375rem; margin-top: 0.25rem; box-sizing: border-box;" %>
+            </div>
           </div>
 
           <!-- Action Buttons -->
