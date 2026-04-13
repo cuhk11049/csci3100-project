@@ -27,6 +27,7 @@ gem "ransack"
 gem "sidekiq"
 gem "sidekiq-cron"
 gem "redis"
+gem 'sendgrid-ruby'
 
 gem "simplecov", group: :test, require: false
 

@@ -5,6 +5,24 @@
       <!-- Centered Header -->
       <h1 class="item-name" style="text-align: center; margin-bottom: 2rem; font-size: 2rem; color: #333; font-weight: 700;">Forget Password</h1>
       
+      <% if flash[:notice] || flash[:alert] %>
+        <div style="margin-bottom: 1.5rem;">
+          <% if flash[:notice] %>
+            <div class="flash-notice" style="background: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 0.375rem; padding: 1rem 1.25rem; margin-bottom: 1rem; font-size: 0.95rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+              <i class="fas fa-check-circle" style="margin-right: 0.5rem;"></i>
+              <%= flash[:notice] %>
+            </div>
+          <% end %>
+          
+          <% if flash[:alert] %>
+            <div class="flash-alert" style="background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 0.375rem; padding: 1rem 1.25rem; margin-bottom: 1rem; font-size: 0.95rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+              <i class="fas fa-exclamation-triangle" style="margin-right: 0.5rem;"></i>
+              <%= flash[:alert] %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
       <!-- Form Container -->
       <div style="background: #f8f9fa; border-radius: 0.5rem; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
         

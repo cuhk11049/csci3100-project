@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   post "/passwords", to: "passwords#create", as: "passwords"
   get "/passwords/:user_id/verify_code", to: "passwords#edit", as: "verify_code"
   patch "/passwords/:user_id", to: "passwords#update", as: "password"
+  get "/passwords/:user_id", to: "passwords#edit_password", as: "password_form"
 
   resources :locations
 
