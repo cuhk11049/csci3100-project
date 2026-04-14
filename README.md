@@ -113,7 +113,7 @@ http://localhost:3000
 Run Rails tests:
 
 ```bash
-bin/rails test
+bin/rails rspec
 ```
 
 Run Cucumber features:
@@ -170,3 +170,4 @@ SimpleCov Report Path for Cucumber: docs/coverage2.png
   (2) Users from United College will see items from United College and New Asia College listed with priority
   (3) Only users from Shaw College can reserve items from their college
   The priority effect will disappear after filter sorting is set.
+- The admin user is created, only admin can view the button for redis server in our setting. (linked with admin_password in .env for seeds).
