@@ -146,8 +146,10 @@ The table below summarizes the features currently implemented in the codebase. P
 
 ## SimpleCov Report Screenshots
 
+```
 SimpleCov Report Path for Rspec: docs/coverage1.png
 SimpleCov Report Path for Cucumber: docs/coverage2.png
+```
 
 
 ## Demo / Deployment
