@@ -6,6 +6,7 @@ Feature: user can find locations
 Scenario: directly find locations
 
   Given I am on the home page
+  When the locations were added
   When I registered account "david" with email name "1155444444", password "222222"
   Then I login using account "david" with password "222222"
   When I follow "All Locations"
@@ -17,6 +18,7 @@ Scenario: directly find locations
 Scenario: find locations from items
 
   Given I am on the home page
+  When the locations were added
   When I registered account "derek" with email name "1155333333", password "111111", location "New Asia College"
   Then I login using account "derek" with password "111111"
   When I create item "scissors" with category "Other", price "20"
