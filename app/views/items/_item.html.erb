@@ -86,7 +86,7 @@
                   class: "btn-new item-btn" %>
     <% end %>
 
-    <% if @item.status == "available" %>
+    <% if @item.status == "available" && ((@item.seller.location == "Shaw College" && @user.location == @item.seller.location)||(@item.seller.location != "Shaw College")) %>
       <%= link_to "Reserve", reserve_item_path(@item), 
                   data: { 
                     turbo_method: :patch,

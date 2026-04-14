@@ -231,8 +231,17 @@
               <span><%= item.seller.name || "Unknown" %></span>
             </div>
             <div>
-            <%= item.seller.location.presence || "CUHK" %>
-          </div>
+              <% location_name = item.seller.location.presence || "CUHK" %>
+              <% location = Location.find_by(name: location_name) %>
+  
+              <% if location %>
+                <%= link_to location.name, location_path(location), 
+                    class: "location-link", data: { turbo: false },
+                    style: "text-decoration: none; color: #333; font-weight: 600; display: block; transition: color 0.2s;" %>
+              <% else %>
+                <%= location_name %>
+              <% end %>
+            </div>
             <div>
             📅 <%= item.post_date %>
           </div>
