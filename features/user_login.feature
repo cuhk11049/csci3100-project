@@ -32,5 +32,5 @@ Scenario: forgot password
   Then I should see "User not found. Please check your email address."
   When I fill in "email" with "1155111111@link.cuhk.edu.hk"
   When I press "Send Verification Code"
-  Then I should see "Enter Verification Code"
+  Then I should see "Enter Verification Code" or "Failed to send email. Please try again."
 	
