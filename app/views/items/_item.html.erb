@@ -19,8 +19,8 @@
   <div class="item-card-detail">
     <div class="item-layout">
       <div class="image-section">
-        <% if (image_name = demo_item_image(@item)).present? %>
-          <%= image_tag image_name, class:"main-image", alt: @item.name %>
+        <% if @item.photo.attached? %>
+          <%= image_tag @item.photo, class:"main-image", alt: @item.name %>
         <% else %>
           <div class="no-image">
             <div class="no-image-icon">📷</div>
