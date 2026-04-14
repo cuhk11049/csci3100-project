@@ -9,7 +9,7 @@ Campus Trade is a Ruby on Rails marketplace web application for the CUHK communi
 ## Team
 
 | Name | Student ID | GitHub Username |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 | `HUANG Ruilin` | `1155211049` | `cuhk11049` |
 | `[Member 2]` | `[1155xxxxxx]` | `[github-id]` |
 | `[Member 3]` | `[1155xxxxxx]` | `[github-id]` |
