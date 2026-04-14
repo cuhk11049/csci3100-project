@@ -107,11 +107,11 @@ class UserMailer < ApplicationMailer
     sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
     response = sg.client.mail._('send').post(request_body: mail_obj.to_json)
     
-    Rails.logger.info "SendGrid Response Status: #{response.status_code}"
-    Rails.logger.info "SendGrid Response Body: #{response.body}"
+    # Rails.logger.info "SendGrid Response Status: #{response.status_code}"
+    # Rails.logger.info "SendGrid Response Body: #{response.body}"
 
     unless response.status_code == '202'
-      Rails.logger.error "❌ SendGrid failed with status: #{response.status_code}"
+      # Rails.logger.error "❌ SendGrid failed with status: #{response.status_code}"
       raise "Failed to send email via SendGrid (Status: #{response.status_code})"
     end
     

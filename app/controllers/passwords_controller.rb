@@ -13,19 +13,15 @@ class PasswordsController < ApplicationController
       begin
       # ✅ Try to send email
       UserMailer.password_reset_code(user, user.password_reset_code).deliver_now
-      
-      Rails.logger.info "✅ Email sent successfully!"
-      
+
       redirect_to verify_code_path(user_id: user.id), 
                   notice: "Verification code sent to your email!"
       rescue => e
-        Rails.logger.error "❌ Failed to send email: #{e.message}"
       
         redirect_to new_password_path, 
                   alert: "Failed to send email. Please try again."
       end
     else
-      Rails.logger.warn "❌ User not found: #{params[:email]}"
       redirect_to new_password_path, 
                 alert: "User not found. Please check your email address."
     end
